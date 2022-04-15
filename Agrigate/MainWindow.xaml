@@ -1,0 +1,67 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agrigate"
+        xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" x:Class="Agrigate.MainWindow"
+        mc:Ignorable="d"
+        Title="Агрегатор Курсов" Height="450" Width="800" FontFamily="TimesNewRoman" FontSize="16" WindowState="Maximized">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/pngtree-geometric-new-force-week-new-items-for-autumn-banner-image_14235.jpg"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="430*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="780*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Grid" Grid.Row="1" Grid.Column="1" Background="#18E64CAE">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="160*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="35*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="386*"/>
+                <ColumnDefinition Width="14*"/>
+                <ColumnDefinition Width="192*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="176*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="MyFiles" ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="GoToViewwer" Grid.RowSpan="4" Margin="0,1,0,4" Background="#FFA1AFEE" Foreground="Black" AutoGenerateColumns="False" RowBackground="#FFEEC4A1" Grid.Row="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название файла" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Вес файла (Мбайт)" Binding="{Binding Lenght}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBox x:Name="Transp" Grid.Column="4" Height="39" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,0,14,0" Background="#FFA1AFEE" />
+            <TextBlock x:Name="URLOfVidoe" Text="{Binding SelectedItem.Path, ElementName=MyFiles, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,9,6" />
+            <TextBox x:Name="TranspN"  Grid.Column="4" TextAlignment="Center"  Background="#FFA1AFEE" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,14,5" />
+            <CheckBox x:Name="OpenWithWindowsPlayer" Content="Открыть с помощью медиаплеера по умолчанию (рекомендуется)" IsChecked="True" Grid.Row="5" FontWeight="Normal" FontStyle="Normal"  VerticalAlignment="Center" Grid.ColumnSpan="3" Height="18" />
+            <StackPanel Grid.Row="2" Grid.Column="4" >
+                <Button Content="Скачать видео" Click="Button_Click" Background="#FFA1AFEE" Foreground="Black" />
+                <Button Content="Обновить список" Click="Refresh" Background="#FFA1AFEE" Foreground="Black"/>
+
+                <Button Content="Удалить видео" Click="Del" Background="#FFA1AFEE" Foreground="Black"/>
+                <Separator BorderBrush="Black" BorderThickness="3"/>
+                <Button Content="Закрыть" Click="Close" Background="#FFA1AFEE" Foreground="Black" />
+            </StackPanel>
+            <TextBlock Text="Ссылка для сохранения:" TextAlignment="Right" Height="40" VerticalAlignment="Center" Grid.Column="2" />
+            <TextBlock Text="Название файла:" TextAlignment="Right" Height="40" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" />
+            <Wpf:WebView2 Source="https://www.youtube.com/" x:Name="WB" Grid.Column="2" Grid.Row="3"  Grid.ColumnSpan="4" Grid.RowSpan="3" />
+            <TextBlock Text="Список загруженных курсов" TextAlignment="Center" Grid.RowSpan="2" Margin="0,0,0,3"/>
+        </Grid>
+    </Grid>
+</Window>
